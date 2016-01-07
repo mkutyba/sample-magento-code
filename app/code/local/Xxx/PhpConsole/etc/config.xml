@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Xxx_PhpConsole>
+            <version>0.1.1</version>
+        </Xxx_PhpConsole>
+    </modules>
+
+    <global>
+        <models>
+            <phpconsole>
+                <class>Xxx_PhpConsole_Model</class>
+            </phpconsole>
+        </models>
+        <helpers>
+            <phpconsole>
+                <class>Xxx_PhpConsole_Helper</class>
+            </phpconsole>
+        </helpers>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <init_phpconsole>
+                        <type>model</type>
+                        <class>phpconsole/observer</class>
+                        <method>initPhpConsole</method>
+                    </init_phpconsole>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+    </global>
+
+    <default>
+        <dev>
+            <debug>
+                <phpconsole>1</phpconsole>
+            </debug>
+        </dev>
+    </default>
+
+</config>

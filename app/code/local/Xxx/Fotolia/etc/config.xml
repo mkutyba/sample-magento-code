@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Xxx_Fotolia>
+            <version>0.1.0</version>
+        </Xxx_Fotolia>
+    </modules>
+    <frontend></frontend>
+    <global>
+        <helpers>
+            <fotolia>
+                <class>Xxx_Fotolia_Helper</class>
+            </fotolia>
+        </helpers>
+    </global>
+    <default>
+        <fotolia>
+            <account>
+                <api_key>api_key</api_key>
+                <username>username</username>
+                <password>pasword</password>
+            </account>
+        </fotolia>
+    </default>
+</config>

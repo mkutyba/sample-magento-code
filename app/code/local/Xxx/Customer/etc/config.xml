@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Xxx_Customer>
+            <version>0.1.0</version>
+        </Xxx_Customer>
+    </modules>
+    <global>
+        <models>
+            <xxx_customer>
+                <class>Xxx_Customer_Model</class>
+            </xxx_customer>
+            <customer>
+                <rewrite>
+                    <customer>Xxx_Customer_Model_Customer</customer>
+                </rewrite>
+            </customer>
+        </models>
+    </global>
+</config>

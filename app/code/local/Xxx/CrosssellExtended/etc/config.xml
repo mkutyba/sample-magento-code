@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Xxx_CrosssellExtended>
+            <version>0.1.0</version>
+        </Xxx_CrosssellExtended>
+    </modules>
+    <global>
+        <helpers>
+            <crosssellextended>
+                <class>Xxx_CrosssellExtended_Helper</class>
+            </crosssellextended>
+        </helpers>
+        <blocks>
+            <crosssellextended>
+                <class>Xxx_CrosssellExtended_Block</class>
+            </crosssellextended>
+            <checkout>
+                <rewrite>
+                    <cart_crosssell>Xxx_CrosssellExtended_Block_Checkout_Cart_Crosssell</cart_crosssell>
+                </rewrite>
+            </checkout>
+        </blocks>
+    </global>
+    <default>
+        <catalog>
+            <crosssell>
+                <show_default_products>1</show_default_products>
+                <default_products></default_products>
+                <show_random>0</show_random>
+            </crosssell>
+        </catalog>
+    </default>
+</config>

@@ -2,42 +2,22 @@
 
 class Xxx_Catalog_Block_Product_View_Printed extends Mage_Catalog_Block_Product_View_Abstract
 {
-    const COLLECTIONS_ID = 1468;
-
-    /**
-     * @param $categoryId
-     * @return mixed returns collection of subcategories containing print patterns
-     */
     public function getSubcategoriesCollection($categoryId)
     {
-        $categories = Mage::getModel('catalog/category')->load($categoryId)->getChildrenCategories();
+        $cats = Mage::getModel('catalog/category')->load($categoryId)->getChildrenCategories();
 
-        /** @var Mage_Catalog_Model_Category $model */
-        $model = Mage::getModel('catalog/category');
-        $categories = $model
+        $cats = Mage::getModel('catalog/category')
             ->getCollection(true)
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('description')
             ->addAttributeToSelect('thumbnail')
             ->addAttributeToSelect('fotolia_thumb')
             ->setOrder('position', Varien_Data_Collection::SORT_ORDER_ASC)
-            ->addIdFilter(array_keys($categories));
+            ->addIdFilter(array_keys($cats));
 
-        return $categories;
+        return $cats;
     }
 
-    /**
-     * @return mixed collection of subcategories containing print patterns, from master category
-     */
-    public function getCollectionsCategories()
-    {
-        return $this->getSubcategoriesCollection(self::COLLECTIONS_ID);
-    }
-
-    /**
-     * @param $categoryId
-     * @return mixed
-     */
     public function getProductsFromCategory($categoryId)
     {
         $collection = Mage::getResourceModel('catalog/product_collection')
@@ -45,5 +25,43 @@ class Xxx_Catalog_Block_Product_View_Printed extends Mage_Catalog_Block_Product_
             ->addCategoryFilter(Mage::getModel('catalog/category')->load($categoryId));
 
         return $collection;
+    }
+
+    public function getVisualizationParams($pricelist)
+    {
+        return Mage::helper('xxx_catalog')->getVisualizationParams($pricelist);
+    }
+
+    public function getCurrentImage()
+    {
+        return Mage::helper('xxx_catalog')->getCurrentImage();
+    }
+
+    public function getCurrentCategory()
+    {
+        return Mage::helper('xxx_catalog')->getCurrentCategory();
+    }
+
+    public function getCurrentImageSource()
+    {
+        return Mage::helper('xxx_catalog')->getCurrentImageSource();
+    }
+
+    public function getCurrentDnrQuery()
+    {
+        return Mage::helper('xxx_catalog')->getCurrentDnrQuery();
+    }
+
+    public function getCurrentCategoryName()
+    {
+        return Mage::helper('xxx_catalog')->getCurrentCategoryName();
+    }
+
+    public function getCropConfig()
+    {
+        if ($params = Mage::registry('dnr_crop_config')) {
+            return $params;
+        }
+        return [];
     }
 }

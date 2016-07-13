@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Xxx_YandexTranslate>
+            <version>0.1.0</version>
+        </Xxx_YandexTranslate>
+    </modules>
+    <global>
+        <helpers>
+            <yandextranslate>
+                <class>Xxx_YandexTranslate_Helper</class>
+            </yandextranslate>
+        </helpers>
+        <models>
+            <yandextranslate>
+                <class>Xxx_YandexTranslate_Model</class>
+                <resourceModel>yandextranslate_resource</resourceModel>
+            </yandextranslate>
+            <yandextranslate_resource>
+                <class>Xxx_YandexTranslate_Model_Resource</class>
+                <entities>
+                    <translated>
+                        <table>yandextranslate_translated</table>
+                    </translated>
+                </entities>
+            </yandextranslate_resource>
+        </models>
+        <resources>
+            <yandextranslate_setup>
+                <setup>
+                    <module>Xxx_YandexTranslate</module>
+                </setup>
+            </yandextranslate_setup>
+        </resources>
+    </global>
+</config>

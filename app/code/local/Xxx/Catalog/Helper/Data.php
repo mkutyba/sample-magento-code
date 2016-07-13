@@ -10,22 +10,12 @@ class Xxx_Catalog_Helper_Data
         if ($product->getFotoliaThumb()) {
             return array($product->getFotoliaThumb());
         }
-        // it is needed to reload product, because not all attributes are available
-        $product = Mage::getModel('catalog/product')->load($product->getId());
         $output = array();
         $output[] = $product->getSmallImage();
 
         // if small_image2 is set - use it
         if ($product->getSmallImage2() != 'no_selection' && $product->getSmallImage2() && $product->getSmallImage2() != $product->getSmallImage()) {
             $output[] = $product->getSmallImage2();
-        } else {
-            $_media = $product->getMediaGalleryImages();
-            foreach ($_media as $image) {
-                if ($image->getFile() != $product->getSmallImage()) {
-                    $output[] = $image->getFile();
-                    break;
-                }
-            }
         }
         return $output;
     }

@@ -1,6 +1,6 @@
 <?php
 
-class Xxx_Catalog_Block_Product_List_Similar extends Mage_Catalog_Block_Product_Abstract
+class Xxx_Catalog_Block_Product_List_Similar extends Xxx_Catalog_Block_Product_View_Printed
 {
     /**
      * Default MAP renderer type
@@ -11,9 +11,6 @@ class Xxx_Catalog_Block_Product_List_Similar extends Mage_Catalog_Block_Product_
 
     protected $_itemCollection;
 
-    /**
-     * prepare similar products collection, based on attribute 'textile_collection'
-     */
     protected function _prepareData()
     {
         /* @var $product Mage_Catalog_Model_Product */
@@ -27,7 +24,8 @@ class Xxx_Catalog_Block_Product_List_Similar extends Mage_Catalog_Block_Product_
         $collection2
             ->setPageSize(20)
             ->addAttributeToSelect('*')
-            ->addAttributeToFilter("textile_collection", array('eq' => $textileCollection));
+            ->addAttributeToFilter("textile_collection", array('eq' => $textileCollection))
+            ->addAttributeToFilter("redirect_to", array('null' => true));
 
         Mage::getSingleton('catalog/product_visibility')->addVisibleInCatalogFilterToCollection($collection2);
 
@@ -36,7 +34,8 @@ class Xxx_Catalog_Block_Product_List_Similar extends Mage_Catalog_Block_Product_
             $collection1
                 ->setPageSize(20)
                 ->addAttributeToSelect('*')
-                ->addAttributeToFilter("textile_collection", array('eq' => $textileCollection));
+                ->addAttributeToFilter("textile_collection", array('eq' => $textileCollection))
+                ->addAttributeToFilter("redirect_to", array('null' => true));
             Mage::getSingleton('catalog/product_visibility')->addVisibleInCatalogFilterToCollection($collection1);
 
             $mergedIds = array_merge($collection1->getAllIds(), $collection2->getAllIds());

@@ -2,6 +2,48 @@
 
 class Xxx_Catalog_Model_Observer
 {
+    public function setCurrentCategory(Varien_Event_Observer $observer)
+    {
+        $action = $observer->getAction();
+        if ($action->getFullActionName() != 'catalog_product_view') {
+            return;
+        }
+        if (Mage::app()->getRequest()->getParam('c', 0)) {
+            return;
+        }
+
+        $currentProduct = Mage::registry('current_product');
+
+        if (!$currentProduct) {
+            return;
+        }
+
+        $catIds = $currentProduct->getCategoryIds();
+
+        if (!is_array($catIds) || !count($catIds)) {
+            return;
+        }
+
+        $category = $this->_getHighestLevelCategory($catIds);
+
+        if ($category && $category->getId()) {
+            Mage::unregister('current_category');
+            Mage::register('current_category', $category);
+        }
+    }
+
+    protected function _getHighestLevelCategory($catIds)
+    {
+        $collection = Mage::getModel('catalog/category')->getCollection();
+        $collection->addAttributeToFilter('entity_id', array('in' => $catIds));
+        $collection->setOrder('level', 'desc');
+        if ($first = $collection->getFirstItem()) {
+            return $first;
+        }
+
+        return false;
+    }
+    
     /**
      * change product price for mtm products (made to measure)
      *

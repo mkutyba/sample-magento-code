@@ -2,11 +2,17 @@
 <config>
     <modules>
         <Xxx_Catalog>
-            <version>0.1.0</version>
+            <version>0.1.3</version>
         </Xxx_Catalog>
     </modules>
     <global>
         <blocks>
+            <catalog>
+                <rewrite>
+                    <product_list>Xxx_Catalog_Block_Product_List</product_list>
+                    <product_list_toolbar>Xxx_Catalog_Block_Product_List_Toolbarfake</product_list_toolbar>
+                </rewrite>
+            </catalog>
             <xxx_catalog>
                 <class>Xxx_Catalog_Block</class>
             </xxx_catalog>
@@ -22,6 +28,9 @@
                     <pricelist>
                         <table>xxx_catalog_pricelist</table>
                     </pricelist>
+                    <upload>
+                        <table>xxx_catalog_upload</table>
+                    </upload>
                 </entities>
             </xxx_catalog_mysql4>
         </models>
@@ -69,7 +78,53 @@
                     </checkout_cart_update_item_complete_handler>
                 </observers>
             </checkout_cart_update_item_complete>
+            <controller_action_layout_load_before>
+                <observers>
+                    <setCurrentCategory>
+                        <type>model</type>
+                        <class>xxx_catalog/observer</class>
+                        <method>setCurrentCategory</method>
+                    </setCurrentCategory>
+                </observers>
+            </controller_action_layout_load_before>
+            <customer_customer_authenticated>
+                <observers>
+                    <attachUploadedFilesToCustomerStep1>
+                        <type>model</type>
+                        <class>xxx_catalog/upload_observer</class>
+                        <method>attachUploadedFilesToCustomerStep1</method>
+                    </attachUploadedFilesToCustomerStep1>
+                </observers>
+            </customer_customer_authenticated>
+            <customer_login>
+                <observers>
+                    <attachUploadedFilesToCustomerStep1>
+                        <type>model</type>
+                        <class>xxx_catalog/upload_observer</class>
+                        <method>attachUploadedFilesToCustomerStep2</method>
+                    </attachUploadedFilesToCustomerStep1>
+                </observers>
+            </customer_login>
         </events>
+        <cache>
+            <types>
+                <xxx_cache_product module="xxx_catalog" translate="label description">
+                    <label>Xxx product blocks cache</label>
+                    <description>Additional caching for product blocks.</description>
+                    <tags>XXX_CACHE_PRODUCT</tags>
+                </xxx_cache_product>
+                <xxx_cache_category module="xxx_catalog" translate="label description">
+                    <label>Xxx category blocks cache</label>
+                    <description>Additional caching for category blocks.</description>
+                    <tags>XXX_CACHE_CATEGORY</tags>
+                </xxx_cache_category>
+                <xxx_cache_pricelist module="xxx_catalog" translate="label description">
+                    <label>Xxx pricelist cache</label>
+                    <description>Caching for pricelist.</description>
+                    <tags>XXX_CACHE_PRICELIST</tags>
+                </xxx_cache_pricelist>
+            </types>
+        </cache>
     </global>
     <frontend>
         <routers>

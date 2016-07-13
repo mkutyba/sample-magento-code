@@ -2,23 +2,65 @@
 <config>
     <modules>
         <Xxx_Fotolia>
-            <version>0.1.0</version>
+            <version>0.1.2</version>
         </Xxx_Fotolia>
     </modules>
-    <frontend></frontend>
     <global>
         <helpers>
             <fotolia>
                 <class>Xxx_Fotolia_Helper</class>
             </fotolia>
         </helpers>
+        <cache>
+            <types>
+                <xxx_cache_fotolia module="xxx_fotolia" translate="label description">
+                    <label>Xxx fotolia cache</label>
+                    <description>Caching for fotolia api.</description>
+                    <tags>XXX_CACHE_FOTOLIA</tags>
+                </xxx_cache_fotolia>
+            </types>
+        </cache>
+        <models>
+            <xxx_fotolia>
+                <class>Xxx_Fotolia_Model</class>
+                <resourceModel>xxx_fotolia_mysql4</resourceModel>
+            </xxx_fotolia>
+            <xxx_fotolia_mysql4>
+                <class>Xxx_Fotolia_Model_Mysql4</class>
+                <entities>
+                    <statistics>
+                        <table>xxx_fotolia_statistics</table>
+                    </statistics>
+                </entities>
+            </xxx_fotolia_mysql4>
+        </models>
+        <resources>
+            <xxx_fotolia_setup>
+                <setup>
+                    <module>Xxx_Fotolia</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </xxx_fotolia_setup>
+            <xxx_fotolia_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </xxx_fotolia_write>
+            <xxx_fotolia_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </xxx_fotolia_read>
+        </resources>
     </global>
     <default>
         <fotolia>
             <account>
-                <api_key>api_key</api_key>
-                <username>username</username>
-                <password>pasword</password>
+                <api_key>ZrAKUUAm5FzXCJCxk01qZbSWPABORPUq</api_key>
+                <username>francgardiner</username>
+                <password>FrancG@rdiner</password>
             </account>
         </fotolia>
     </default>
